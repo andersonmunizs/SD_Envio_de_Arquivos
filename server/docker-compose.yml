@@ -1,4 +1,3 @@
-version: '3.8' # Pode remover se usar Docker Compose V2
 
 services:
   app: # Nome do serviço combinado
