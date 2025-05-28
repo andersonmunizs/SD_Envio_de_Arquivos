@@ -1,33 +1,24 @@
 
 services:
   db:
-    image: postgres:16 # Imagem oficial do PostgreSQL, versão 16
-    container_name: postgres_db_servidor_auditoria # Nome do contêiner
-    restart: always # Reinicia o contêiner automaticamente se ele parar
+    image: postgres:16 
+    container_name: postgres_db_servidor_auditoria 
+    restart: always 
     environment:
-      POSTGRES_DB: filesdb # Nome do banco de dados a ser criado
-      POSTGRES_USER: postgres # Usuário padrão do PostgreSQL
-      POSTGRES_PASSWORD: postgres # Senha padrão do PostgreSQL
+      POSTGRES_DB: filesdb 
+      POSTGRES_USER: postgres 
+      POSTGRES_PASSWORD: postgres 
     ports:
-      # Mapeia a porta 5432 do contêiner para a porta 5432 da máquina host
-      # Isso permite que aplicações externas (como seu backend) se conectem ao banco
       - "5432:5432"
     volumes:
-      # Volume nomeado para persistir os dados do PostgreSQL
-      # mesmo que o contêiner seja parado ou removido
       - pg_data_c1_auditoria:/var/lib/postgresql/data
-      # Monta o diretório init_db do host para /docker-entrypoint-initdb.d no contêiner
-      # Scripts .sh, .sql, .sql.gz neste diretório são executados na primeira vez que o contêiner é iniciado
       - ./init_db:/docker-entrypoint-initdb.d
     networks:
-      # Define uma rede para o serviço de banco de dados (opcional para um único serviço neste compose)
       - db-network-c1
 
 volumes:
-  # Declaração do volume nomeado para persistência
   pg_data_c1_auditoria:
 
 networks:
-  # Declaração da rede
   db-network-c1:
     driver: bridge

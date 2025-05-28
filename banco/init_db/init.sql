@@ -24,10 +24,8 @@ RETURNS TRIGGER AS $$
 DECLARE
     v_requester_ip VARCHAR(45);
 BEGIN
-    -- Tenta obter o IP do requisitante da configuração da sessão/transação
-    -- Esta configuração 'app.current_requester_ip' deve ser definida pela aplicação backend
     BEGIN
-        v_requester_ip := current_setting('app.current_requester_ip', true); -- o 'true' evita erro se a variável não estiver definida
+        v_requester_ip := current_setting('app.current_requester_ip', true); 
         IF v_requester_ip = '' THEN
             v_requester_ip := NULL; -- Trata string vazia como NULL
         END IF;
@@ -52,7 +50,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Remove o gatilho antigo se existir, para evitar duplicidade ao recriar
+
 DROP TRIGGER IF EXISTS trg_auditar_arquivos_modificacoes ON files;
 
 -- Cria o gatilho na tabela 'files'

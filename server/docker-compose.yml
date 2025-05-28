@@ -1,15 +1,13 @@
 
 services:
-  app: # Nome do serviço combinado
-    build: . # Constrói a partir do Dockerfile na pasta atual
+  app: 
+    build: . 
     container_name: app_combinada_servidor_auditoria
     restart: always
     ports:
-      # Mapeia a porta do host (ex: 8080) para a porta da aplicação no container (ex: 3000)
-      - "8080:3000" # Se APP_PORT no .env for 3000
+      - "8080:3000"
     volumes:
-      - app_uploads_auditoria:/app/uploads # Persiste os arquivos enviados
-    # As variáveis de ambiente são lidas do arquivo .env pelo dotenv no server.js
+      - app_uploads_auditoria:/app/uploads 
     networks:
       - app-network
 

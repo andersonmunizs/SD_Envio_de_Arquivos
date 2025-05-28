@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 const fs = require('fs');
 
 const app = express();
-const PORT = process.env.APP_PORT || 3000; // Porta que a aplicação combinada usará
+const PORT = process.env.APP_PORT || 3000; 
 
 // --- Configurações do Backend ---
 const storage = multer.diskStorage({
@@ -37,9 +37,7 @@ pool.on('connect', () => console.log('App Combinada: Conectado ao PostgreSQL!'))
 pool.on('error', (err) => console.error('App Combinada: Erro no pool do PostgreSQL', err));
 
 // --- Rotas do Backend ---
-// As chamadas do frontend em script.js para '/api/upload' agora serão para '/upload'
-// ou você pode manter o prefixo /api/ se preferir, ajustando as rotas aqui.
-app.post('/api/upload', upload.single('file'), async (req, res) => { // Mantendo /api/ por consistência com o script.js atual
+app.post('/api/upload', upload.single('file'), async (req, res) => { 
   if (!req.file) {
     return res.status(400).send('Nenhum arquivo enviado.');
   }
