@@ -47,7 +47,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
   try {
     dbClient = await pool.connect();
     await dbClient.query('BEGIN');
-    await dbClient.query('SET LOCAL app.current_requester_ip = $1', [clientIp]);
+    await dbClient.query(`SET LOCAL app.current_requester_ip = '${clientIp}'`);
     await dbClient.query(
       'INSERT INTO files (filename, originalname, upload_time) VALUES ($1, $2, NOW())',
       [file.filename, file.originalname]
