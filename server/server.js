@@ -23,10 +23,10 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-app.set('trust proxy', 1); // Se ainda estiver atrás de um proxy externo (ex: Nginx geral)
+app.set('trust proxy', 1); 
 
 const pool = new Pool({
-  host: process.env.DB_HOST, // IP da máquina com PostgreSQL
+  host: process.env.DB_HOST, 
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
@@ -68,7 +68,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
   }
 });
 
-// Mantendo /api/ por consistência com o script.js atual
+
 app.get('/api/relatorio-auditoria/arquivos', async (req, res) => {
   let dbClient;
   try {

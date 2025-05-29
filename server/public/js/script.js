@@ -14,10 +14,10 @@ form.addEventListener('submit', async (e) => {
     formData.append('file', fileInput.files[0]);
 
     statusDiv.innerText = 'Enviando...';
-    statusDiv.style.color = '#333'; // Cor padrão
+    statusDiv.style.color = '#333'; 
 
     try {
-        const response = await fetch('/api/upload', { // Chama /api/upload que é proxied pelo Nginx
+        const response = await fetch('/api/upload', { 
             method: 'POST',
             body: formData,
         });
@@ -27,7 +27,7 @@ form.addEventListener('submit', async (e) => {
 
         if (response.ok) {
             statusDiv.style.color = 'green';
-            fileInput.value = ''; // Limpa o input do arquivo após sucesso
+            fileInput.value = ''; 
         } else {
             statusDiv.style.color = 'red';
         }

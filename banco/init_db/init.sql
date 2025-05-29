@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS auditoria_arquivos_log (
     operacao_tipo VARCHAR(10) NOT NULL, -- INSERT, UPDATE, DELETE
     dados_antigos JSONB,
     dados_novos JSONB,
-    requester_ip VARCHAR(45), -- IP da máquina que fez a requisição
+    requester_ip VARCHAR(45), 
     usuario_db VARCHAR(255),
     tempo_modificacao TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -27,10 +27,10 @@ BEGIN
     BEGIN
         v_requester_ip := current_setting('app.current_requester_ip', true); 
         IF v_requester_ip = '' THEN
-            v_requester_ip := NULL; -- Trata string vazia como NULL
+            v_requester_ip := NULL; 
         END IF;
     EXCEPTION WHEN OTHERS THEN
-        v_requester_ip := NULL; -- Ou 'UNKNOWN' se preferir
+        v_requester_ip := NULL;
     END;
 
     IF (TG_OP = 'INSERT') THEN
